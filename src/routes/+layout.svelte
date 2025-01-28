@@ -40,8 +40,8 @@
 				tooltipAlignment="end"
 				icon={Login}
 				on:click={async () => {
-					await authClient.signIn.social({
-						provider: 'github',
+					await authClient.signIn.oauth2({
+						providerId: 'ibm',
 						callbackURL: '/'
 					});
 				}}
