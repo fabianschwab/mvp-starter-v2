@@ -53,6 +53,7 @@
 				icon={Logout}
 				on:click={async () => {
 					await authClient.signOut();
+					window.location.reload();
 				}}
 			/>
 		{/if}
