@@ -1,12 +1,7 @@
 <script lang="ts">
-	import { authClient } from '$lib/auth-client';
-	const session = authClient.useSession();
+	let { data } = $props();
 </script>
 
 <div>
-	{#if $session.data}
-		<pre>
-				{JSON.stringify($session?.data?.user, null, 2)}
-		</pre>
-	{/if}
+	<pre>{JSON.stringify(data, null, 2)}</pre>
 </div>

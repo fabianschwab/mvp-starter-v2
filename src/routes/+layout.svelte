@@ -16,15 +16,14 @@
 	import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
 	import Notifications from '$lib/components/Notifications.svelte';
 
-	let { children } = $props();
+	let { children, data } = $props();
 
-	const session = authClient.useSession();
 	let isSideNavOpen = $state(false);
 </script>
 
 <Header
 	href="/"
-	persistentHamburgerMenu={$session.data ? true : false}
+	persistentHamburgerMenu={data.session ? true : false}
 	company="IBM"
 	platformName="Carbon Svelte"
 	bind:isSideNavOpen
@@ -34,7 +33,7 @@
 	</svelte:fragment>
 	<HeaderUtilities>
 		<ThemeSwitcher />
-		{#if !$session.data}
+		{#if !data.session}
 			<HeaderGlobalAction
 				iconDescription="Log in"
 				tooltipAlignment="end"
@@ -59,10 +58,10 @@
 		{/if}
 	</HeaderUtilities>
 </Header>
-{#if $session.data}
+{#if data.session}
 	<SideNav bind:isOpen={isSideNavOpen}>
 		<SideNavItems>
-			<SideNavLink text="Link 1" />
+			<SideNavLink text="Notifications" href="/notifications" />
 			<SideNavLink text="Link 2" />
 			<SideNavLink text="Link 3" />
 		</SideNavItems>
