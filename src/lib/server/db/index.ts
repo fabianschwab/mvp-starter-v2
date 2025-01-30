@@ -9,10 +9,10 @@ export const db = drizzle(client);
 export async function checkDrizzleConnection() {
 	try {
 		await db.execute('SELECT 1'); // A simple query to check the connection
-		console.log('Connection to the database is successful!');
+		console.debug('DEBUG: ', 'Connection to the database is successful!');
 		return true;
 	} catch (error) {
-		console.error('Connection to the database failed:', error);
+		console.error('ERROR: ', 'Connection to the database failed:', error);
 	}
 	return false;
 }
