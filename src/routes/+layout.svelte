@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { authClient } from '$lib/auth-client';
+	import { authClient } from '$lib/client/auth-client';
 	import {
 		Header,
 		SkipToContent,
