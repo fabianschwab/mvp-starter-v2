@@ -9,10 +9,14 @@
 		SideNavItems,
 		SideNavLink,
 		HeaderUtilities,
-		HeaderGlobalAction
+		HeaderGlobalAction,
+		HeaderAction,
+		HeaderPanelDivider,
+		HeaderPanelLink,
+		HeaderPanelLinks
 	} from 'carbon-components-svelte';
 
-	import { Login, Logout } from 'carbon-icons-svelte';
+	import { Login, Logout, UserAvatar } from 'carbon-icons-svelte';
 	import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
 	import Notifications from '$lib/components/Notifications.svelte';
 
@@ -33,7 +37,25 @@
 	</svelte:fragment>
 	<HeaderUtilities>
 		<ThemeSwitcher />
-		{#if !data.session}
+		{#if data.session}
+			<HeaderAction icon={UserAvatar}>
+				<div class="welcome">Welcome</div>
+				<div class="user">{data.user?.name}</div>
+				<HeaderPanelLinks>
+					<HeaderPanelDivider>Settings</HeaderPanelDivider>
+					<HeaderPanelLink href="/">Example Entry</HeaderPanelLink>
+				</HeaderPanelLinks>
+			</HeaderAction>
+			<HeaderGlobalAction
+				iconDescription="Log out"
+				tooltipAlignment="end"
+				icon={Logout}
+				on:click={async () => {
+					await authClient.signOut();
+					window.location.reload();
+				}}
+			/>
+		{:else}
 			<HeaderGlobalAction
 				iconDescription="Log in"
 				tooltipAlignment="end"
@@ -45,16 +67,6 @@
 					});
 				}}
 			></HeaderGlobalAction>
-		{:else}
-			<HeaderGlobalAction
-				iconDescription="Log out"
-				tooltipAlignment="end"
-				icon={Logout}
-				on:click={async () => {
-					await authClient.signOut();
-					window.location.reload();
-				}}
-			/>
 		{/if}
 	</HeaderUtilities>
 </Header>
@@ -71,3 +83,14 @@
 <Content>
 	{@render children()}
 </Content>
+
+<style>
+	.user {
+		margin-left: 1rem;
+		font-size: x-large;
+	}
+	.welcome {
+		margin-top: 1rem;
+		margin-left: 1rem;
+	}
+</style>
