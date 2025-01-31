@@ -12,7 +12,7 @@
 </script>
 
 {#if $theme === 'g10'}
-	<HeaderActionLink icon={Asleep} on:click={() => ($theme = 'g90')} />
+	<HeaderActionLink icon={Asleep} on:click={() => ($theme = 'g100')} />
 {:else}
 	<HeaderActionLink icon={Awake} on:click={() => ($theme = 'g10')} />
 {/if}
